@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    margin: 100px auto;
+    border: 1px solid #dbdbdb; /*나중에 지우기*/
+    padding: 10px;
+    width: 1080px;
+    height: 750px;
+    background-color: #fafafa;
+}
+
+.btn {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer; /*버튼위에 마우스 이동시 손가락 표시*/
+}
+
+.main-container {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.text-input {
+    outline: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 20px;
+}
+

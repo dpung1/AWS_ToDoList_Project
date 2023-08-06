@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/welcome.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    
 </head>
 <body>
-    
+    <div id="root">
+        <div class="container">
+            <main class="main-container">
+                <aside class="sidebar">
+                    <h1 class="sidebar-logo">오늘의 할 일</h1>
+                    <header class="todolist-header-items">
+                        <input type="text" class="test-input" placeholder="할 일을 입력해주세요">
+                        <div class="todolist-header-items">
+                            <button class="btn">추가</button>
+                        </div>
+                    </header>
+                    <ul class="todolist-main-container">
+                        <li class="todolist-main-items">
+                            <div class="item-left">
+                                <input type="checkbox" id="complet-checkbox1" class="complet-checkboxs">
+                                <label for="complet-checkbox1"></label>
+                            </div>
+                            <div class="item-center">
+                                <pre class="todolist-contant">멍</pre>
+                            </div>
+                            <div class="item-right">
+                                <p class="todolist-date"></p>
+                                <div class="todolist-item-button">
+                                    <button class="btn btn-edit">수정</button>
+                                    <button class="btn btn-remove">삭제</button>
+                                </div>
+                            </div>
+        
+                        </li>
+                    </ul>
+                </aside>
+                <div class="welcome-page-container">
+                    <h1 class="welcome-page-title">Calendar TodoList</h1>
+                    <button class="write-link-button" onclick="">Creating a List</button>
+                </div>
+            </main>
+        </div>
+    </div>
 </body>
 </html>
