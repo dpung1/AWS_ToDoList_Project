@@ -8,47 +8,38 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/welcome.css">
-    <link rel="stylesheet" href="./css/sidebar.css">
-    
+
 </head>
 <body>
     <div id="root">
         <div class="container">
-            <main class="main-container">
-                <aside class="sidebar">
-                    <h1 class="sidebar-logo">오늘의 할 일</h1>
-                    <header class="todolist-header-items">
-                        <input type="text" class="test-input" placeholder="할 일을 입력해주세요">
-                        <div class="todolist-header-items">
-                            <button class="btn">추가</button>
-                        </div>
-                    </header>
-                    <ul class="todolist-main-container">
-                        <li class="todolist-main-items">
-                            <div class="item-left">
-                                <input type="checkbox" id="complet-checkbox1" class="complet-checkboxs">
-                                <label for="complet-checkbox1"></label>
-                            </div>
-                            <div class="item-center">
-                                <pre class="todolist-contant">멍</pre>
-                            </div>
-                            <div class="item-right">
-                                <p class="todolist-date"></p>
-                                <div class="todolist-item-button">
-                                    <button class="btn btn-edit">수정</button>
-                                    <button class="btn btn-remove">삭제</button>
-                                </div>
-                            </div>
-        
-                        </li>
-                    </ul>
-                </aside>
-                <div class="welcome-page-container">
+            <main class="main-container"> <!-- 메인 부분 -->
+                <div class="welcome-page-container invisible"> <!-- Welcome page -->
                     <h1 class="welcome-page-title">Calendar TodoList</h1>
                     <button class="write-link-button" onclick="">Creating a List</button>
+                </div>
+                <div class="calendar-page-container"> <!-- calender page -->
+                    <header class="calendar-header">
+                        <button class="calendar-before-button"></button>
+                        <div class="calendar-month">월</div>
+                        <button class="calendar-next-button"></button>
+                    </header>
+                    <table class="calendar-table">
+                        <thead class="calendar-thead">
+                            <tr>
+                                <th>일</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                                <th>토</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </main>
         </div>
     </div>
 </body>
-</html>
+</html> 
