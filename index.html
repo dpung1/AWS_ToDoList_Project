@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/welcome.css">
+    <link rel="stylesheet" href="./css/calendar.css">
 
 </head>
 <body>
@@ -20,9 +21,11 @@
                 </div>
                 <div class="calendar-page-container"> <!-- calender page -->
                     <header class="calendar-header">
-                        <button class="calendar-before-button"></button>
-                        <div class="calendar-month">월</div>
-                        <button class="calendar-next-button"></button>
+                        <button id="beforeButton" class="calendar-before-button">
+                            <i class="fa-solid fa-chevron-left fa-lg"></i></button>
+                        <div class="calendar-month"></div>
+                        <button id="nextButton" class="calendar-next-button">
+                            <i class="fa-solid fa-chevron-right fa-lg"></i></button>
                     </header>
                     <table class="calendar-table">
                         <thead class="calendar-thead">
@@ -36,10 +39,15 @@
                                 <th>토</th>
                             </tr>
                         </thead>
+                        <tbody id="calendar-body" class="calendar-tbody">
+                            
+                        </tbody>
                     </table>
                 </div>
             </main>
         </div>
     </div>
+
+    <script src="./js/calendar.js"></script>
 </body>
 </html> 

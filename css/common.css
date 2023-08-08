@@ -7,7 +7,7 @@ body {
 .container {
     position: relative;
     margin: 100px auto;
-    border: 1px solid #dbdbdb; /*나중에 지우기*/
+    border: 1px solid black; /*나중에 지우기*/
     padding: 10px;
     width: 1080px;
     height: 750px;
