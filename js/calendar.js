@@ -12,7 +12,6 @@ function showCalendar() {
     let currentDate = new Date(firstDay);
     let weekRow = document.createElement("tr");
 
-    // 공백 셀 추가
     for (let i = 0; i < firstDay.getDay(); i++) {
         const emptyCell = document.createElement("td");
         weekRow.appendChild(emptyCell);
@@ -20,10 +19,14 @@ function showCalendar() {
 
     while (currentDate <= lastDay) {
         const cell = document.createElement("td");
-        cell.textContent = currentDate.getDate();
-        cell.addEventListener("click", () => {
+        const content = document.createElement("div");
+        const contentText = document.createElement("span");
+        contentText.textContent = currentDate.getDate();
+        contentText.addEventListener("click", () => {
             handleDateClick(currentDate.getDate());
         });
+        content.appendChild(contentText);
+        cell.appendChild(content);
         weekRow.appendChild(cell);
 
         if (currentDate.getDay() === 6 || currentDate.getTime() === lastDay.getTime()) {
@@ -49,5 +52,10 @@ function nextMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, calendarDate.getDate());
     showCalendar();
 }
+
+
+document.getElementById("beforebtn").addEventListener("click", beforeMonth);
+
+document.getElementById("nextbtn").addEventListener("click", nextMonth);
 
 showCalendar();
