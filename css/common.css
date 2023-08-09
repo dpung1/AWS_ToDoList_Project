@@ -23,6 +23,7 @@ body {
 }
 
 .main-container {
+    transition: transform 0.75s ease;
     padding: 20px;
     width: 100%;
     height: 100%;
@@ -37,4 +38,8 @@ body {
     border: 1px solid #dbdbdb;
     border-radius: 4px;
     padding: 5px 20px;
+}
+
+.w-f {
+    width: 100%;
 }
