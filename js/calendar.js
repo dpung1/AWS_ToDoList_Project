@@ -23,7 +23,7 @@ function showCalendar() {
         const contentText = document.createElement("span");
         contentText.textContent = currentDate.getDate();
         contentText.addEventListener("click", () => {
-            handleDateClick(currentDate.getDate());
+            handleDateClick(contentText.textContent);
         });
         content.appendChild(contentText);
         cell.appendChild(content);
@@ -42,6 +42,8 @@ function showCalendar() {
 }
 
 function handleDateClick(date) {
+    let clickedDateInfo = null;
+
     const todoListSideBar = document.querySelector(".todolist-sidebar");
     const mainContainer = document.querySelector(".main-container");
     const isToDoListSidebarOpen = "isToDoListSibebarOpen"; 
@@ -57,17 +59,23 @@ function handleDateClick(date) {
         const month = calendarDate.getMonth() + 1;
         
         clickedDateDisplay.textContent = `${year}년 ${month}월 ${date}일`
+
+        clickedDateInfo = {
+            year: calendarDate.getFullYear(),
+            month: calendarDate.getMonth() + 1,
+            day: date
+        };
+    
+        
     } else {
         mainContainer.style.transform = "none";
         clickedDateDisplay.textContent = "";
+
     }
-    
-    contentText.addEventListener("click", () => {
-        handleDateClick(currentDate.getDate());
-    });
+
+    TodoListService.getInstance().updateTodoList();
 
 }
-
 
 function beforeMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, calendarDate.getDate());

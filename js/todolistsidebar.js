@@ -1,6 +1,5 @@
 const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
-    
 }
 
 const addTodoOnKeyUpHandle = (event) => {
@@ -10,7 +9,7 @@ const addTodoOnKeyUpHandle = (event) => {
 }
 
 const checkedOnChangeHandle = (target) => {
-    TodoListService.getInstance().setCompleStatus(target.value, target.checked);
+    TodoListService.getInstance().setCompleStatus(target.value, target.checked)
 }
 
 const modifyTodoOnClickHandle = (target) => {
@@ -24,22 +23,31 @@ const deleteTodoOnClickHandle = (target) => {
 
 const generateTodoObj = () => {
     const todoContent = document.querySelector(".todolist-sidebar-items .text-input").value;
-    const todoObj = {
-        id : 0,
-        todoContent : todoContent,
-        createDate : DateUtills.toStringByFormatting(new Date()),
-        completStatus : false
-    };
-    TodoListService.getInstance().addTodo(todoObj);
+
+    if (clickedDateInfo) {
+        const todoObj = {
+            id: 0,  // 적절한 ID 값을 할당해야 함
+            todoContent: todoContent,
+            completStatus: false,
+            year: clickedDateInfo.year,   // 클릭한 날짜 정보 추가
+            month: clickedDateInfo.month,
+            day: clickedDateInfo.day
+        };
+
+        TodoListService.getInstance().addTodo(todoObj);
+    } else {
+        console.log("클릭한 날짜 정보가 없습니다.");
+    }
 }
 
 class TodoListService {
-    static #instance = null; 
+    static #instance = null;
 
     static getInstance() {
         if(this.#instance === null) {
             this.#instance = new TodoListService();
         }
+        
         return this.#instance;
     }
 
@@ -51,8 +59,8 @@ class TodoListService {
     }
 
     loadTodoList() {
-        this.todoList = !!localStorage.getItem("todoList") ? JSON.parse(localStorage.getItem("todoList")) : new Array() ;
-        this.todoIndex = !!this.todoList[this.todoList.length - 1]?.id ? this.todoList[this.todoList.length - 1].id + 1 : 1;
+        this.todoList = !!localStorage.getItem("todoList") ? JSON.parse(localStorage.getItem("todoList")) : new Array();
+        this.todoIndex = !!this.todoList[this.todoList.length -1] ?.id ? this.todoList[this.todoList.length -1].id + 1 : 1;
     }
 
     saveLocalStorage() {
@@ -66,9 +74,10 @@ class TodoListService {
     addTodo(todoObj) {
         const todo = {
             ...todoObj,
-            id: this.todoIndex
+            id : this.todoIndex
         }
-        this.todoList.push(todo); 
+
+        this.todoList.push(todo);
 
         this.saveLocalStorage();
 
@@ -76,11 +85,11 @@ class TodoListService {
 
         this.todoIndex++;
     }
-    
+
     setCompleStatus(id, status) {
         this.todoList.forEach((todo, index) => {
             if(todo.id === parseInt(id)) {
-                this.todoList[index].completStatus = status;
+                this.todoList[index].completStatus == status;
             }
         });
 
@@ -108,32 +117,33 @@ class TodoListService {
         this.updateTodoList();
     }
 
+    updateTodoList() {
+        const todoListMainConteiner = document.querySelector(".todolist-sidebar-main-container");
+        
+        todoListMainConteiner.innerHTML = this.todoList.map(todo => {
+            return`
+            <li class="todolist-items">
+                <div class="item-left">
 
-    updateTodoList() { 
-        const todolistMainConteiner = document.querySelector(".todolist-sidebar-main-container");
+                    <input type="checkbox" id="complet-chkbox${todo.id}}"
+                    class="complet-chkboxs" ${todo.completStatus ? "checked" : ""}
+                    value="${todo.id}" onchange="checkedOnChangeHandle(this);">
 
-        todolistMainConteiner.innerHTML = this.todoList.map(todo => {
-            return `
-                <li class="todolist-items">
-                    <div class="item-left">
-
-                        <input type="checkbox" id="complet-chkbox${todo.id}" 
-                        class="complet-chkboxs" ${todo.completStatus ? "checked" : "" } 
-                        value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-
-                        <label for="complet-chkbox"${todo.id}></label>
+                    <label for="complet-chkbox${todo.id}"}></label>
+                </div>
+                <div class="itme-center">
+                    <pre class="todolist-contant">${todo.todoContent}</pre>
+                </div>
+                <div class="item-right">
+                    <div class="todolist-item-buttons">
+                        <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
+                        <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
                     </div>
-                    <div class="itme-center">
-                        <pre class="todolist-contant">${todo.todoContent}</pre>
-                    </div>
-                    <div class="item-right">
-                        <div class="todolist-item-buttons">
-                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
-                        </div>
-                    </div>
-                </li>
-            `;            
+                </div>
+            </li> 
+            `;
         }).join("");
     }
+
+
 }
