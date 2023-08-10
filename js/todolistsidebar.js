@@ -24,20 +24,16 @@ const deleteTodoOnClickHandle = (target) => {
 const generateTodoObj = () => {
     const todoContent = document.querySelector(".todolist-sidebar-items .text-input").value;
 
-    if (clickedDateInfo) {
-        const todoObj = {
-            id: 0,  // 적절한 ID 값을 할당해야 함
-            todoContent: todoContent,
-            completStatus: false,
-            year: clickedDateInfo.year,   // 클릭한 날짜 정보 추가
-            month: clickedDateInfo.month,
-            day: clickedDateInfo.day
-        };
+    const todoObj = {
+        id: 0,  // 적절한 ID 값을 할당해야 함
+        todoContent: todoContent,
+        completStatus: false,
+        createDate: Calendar.getInstance().textContent
+    };
 
-        TodoListService.getInstance().addTodo(todoObj);
-    } else {
-        console.log("클릭한 날짜 정보가 없습니다.");
-    }
+    console.log(todoObj)
+    TodoListService.getInstance().addTodo(todoObj);
+        
 }
 
 class TodoListService {
@@ -119,31 +115,29 @@ class TodoListService {
 
     updateTodoList() {
         const todoListMainConteiner = document.querySelector(".todolist-sidebar-main-container");
-        
+
         todoListMainConteiner.innerHTML = this.todoList.map(todo => {
-            return`
-            <li class="todolist-items">
-                <div class="item-left">
-
-                    <input type="checkbox" id="complet-chkbox${todo.id}}"
-                    class="complet-chkboxs" ${todo.completStatus ? "checked" : ""}
-                    value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-
-                    <label for="complet-chkbox${todo.id}"}></label>
-                </div>
-                <div class="itme-center">
-                    <pre class="todolist-contant">${todo.todoContent}</pre>
-                </div>
-                <div class="item-right">
-                    <div class="todolist-item-buttons">
-                        <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                        <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                return`
+                <li class="todolist-items">
+                    <div class="item-left">
+    
+                        <input type="checkbox" id="complet-chkbox${todo.id}}"
+                        class="complet-chkboxs" ${todo.completStatus ? "checked" : ""}
+                        value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+    
+                        <label for="complet-chkbox${todo.id}"}></label>
                     </div>
-                </div>
-            </li> 
-            `;
+                    <div class="itme-center">
+                        <pre class="todolist-contant">${todo.todoContent}</pre>
+                    </div>
+                    <div class="item-right">
+                        <div class="todolist-item-buttons">
+                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
+                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                        </div>
+                    </div>
+                </li> 
+                `;
         }).join("");
     }
-
-
 }

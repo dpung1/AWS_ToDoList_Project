@@ -3,6 +3,18 @@ const monthDisplay = document.querySelector(".calendar-month");
 
 let calendarDate = new Date();
 
+class Calendar {
+    static #instance = null;
+
+    static getInstance() {
+        if(this.#instance === null) {
+            this.#instance = new Calendar();
+        }
+        return this.#instance;
+    }
+    textContent = null;
+}
+
 function showCalendar() {
     const firstDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
     const lastDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 0);
@@ -34,7 +46,6 @@ function showCalendar() {
             weekRow = document.createElement("tr");
         }
 
-        
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
@@ -42,9 +53,7 @@ function showCalendar() {
 }
 
 function handleDateClick(date) {
-    let clickedDateInfo = null;
-
-    const todoListSideBar = document.querySelector(".todolist-sidebar");
+    const todoListSideBar = document.querySelector(".todolist-sidebar"); 
     const mainContainer = document.querySelector(".main-container");
     const isToDoListSidebarOpen = "isToDoListSibebarOpen"; 
     
@@ -58,23 +67,14 @@ function handleDateClick(date) {
         const year = calendarDate.getFullYear();
         const month = calendarDate.getMonth() + 1;
         
-        clickedDateDisplay.textContent = `${year}년 ${month}월 ${date}일`
+        clickedDateDisplay.textContent = `${year}년 ${month}월 ${date}일`;
+        Calendar.getInstance().textContent = clickedDateDisplay.textContent;
 
-        clickedDateInfo = {
-            year: calendarDate.getFullYear(),
-            month: calendarDate.getMonth() + 1,
-            day: date
-        };
-    
-        
     } else {
         mainContainer.style.transform = "none";
-        clickedDateDisplay.textContent = "";
-
     }
-
+    console.log(Calendar.getInstance().textContent)
     TodoListService.getInstance().updateTodoList();
-
 }
 
 function beforeMonth() {
@@ -82,13 +82,14 @@ function beforeMonth() {
     showCalendar();
 }
 
+document.getElementById("beforebtn").addEventListener("click", beforeMonth);
+
 function nextMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, calendarDate.getDate());
     showCalendar();
 }
 
-document.getElementById("beforebtn").addEventListener("click", beforeMonth);
-
 document.getElementById("nextbtn").addEventListener("click", nextMonth);
+
 
 showCalendar();
