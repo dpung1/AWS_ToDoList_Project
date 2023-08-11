@@ -12,7 +12,7 @@ class Calendar {
         }
         return this.#instance;
     }
-    textContent = null;
+    selectedDate = null;
 }
 
 function showCalendar() {
@@ -35,7 +35,8 @@ function showCalendar() {
         const contentText = document.createElement("span");
         contentText.textContent = currentDate.getDate();
         contentText.addEventListener("click", () => {
-            handleDateClick(contentText.textContent);
+            const selectedDate = new Date(`${calendarDate.getFullYear()}/${calendarDate.getMonth() + 1}/${contentText.textContent}`);
+            handleDateClick(selectedDate);
         });
         content.appendChild(contentText);
         cell.appendChild(content);
@@ -52,7 +53,7 @@ function showCalendar() {
     monthDisplay.textContent = `${calendarDate.getFullYear()}년 ${calendarDate.getMonth() + 1}월`;
 }
 
-function handleDateClick(date) {
+function handleDateClick(selectedDate) {
     const todoListSideBar = document.querySelector(".todolist-sidebar"); 
     const mainContainer = document.querySelector(".main-container");
     const isToDoListSidebarOpen = "isToDoListSibebarOpen"; 
@@ -67,13 +68,14 @@ function handleDateClick(date) {
         const year = calendarDate.getFullYear();
         const month = calendarDate.getMonth() + 1;
         
-        clickedDateDisplay.textContent = `${year}년 ${month}월 ${date}일`;
-        Calendar.getInstance().textContent = clickedDateDisplay.textContent;
+        clickedDateDisplay.textContent = `${year}년 ${month}월 ${selectedDate.getDate()}일`;
+        console.log(selectedDate)
+        Calendar.getInstance().selectedDate = selectedDate;
+        console.log(Calendar.getInstance().selectedDate)
 
     } else {
         mainContainer.style.transform = "none";
     }
-    console.log(Calendar.getInstance().textContent)
     TodoListService.getInstance().updateTodoList();
 }
 

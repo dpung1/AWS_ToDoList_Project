@@ -28,7 +28,7 @@ const generateTodoObj = () => {
         id: 0,  // 적절한 ID 값을 할당해야 함
         todoContent: todoContent,
         completStatus: false,
-        createDate: Calendar.getInstance().textContent
+        createDate: DateUtils.toStringByFormatting(Calendar.getInstance().selectedDate)
     };
 
     console.log(todoObj)
@@ -116,7 +116,7 @@ class TodoListService {
     updateTodoList() {
         const todoListMainConteiner = document.querySelector(".todolist-sidebar-main-container");
 
-        todoListMainConteiner.innerHTML = this.todoList.map(todo => {
+        todoListMainConteiner.innerHTML = this.todoList.filter(todo => todo.createDate === DateUtils.toStringByFormatting(Calendar.getInstance().selectedDate)).map(todo => {
                 return`
                 <li class="todolist-items">
                     <div class="item-left">
