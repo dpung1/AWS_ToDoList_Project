@@ -20,6 +20,14 @@ const modifySumitButtonOnClick = (id) => {
         todoContent : newTodoContent
     }
     TodoListService.getInstance().setTodo(todoObj);
+    closeModal();
+}
+
+const modifySumitOnkeyUp = (event, id) => {
+    if(event.keyCode === 13) {
+        modifySumitButtonOnClick(id)
+    }
+
 }
 
 const modifyModal = (todo) => {
@@ -35,10 +43,10 @@ const modifyModal = (todo) => {
                 <p class="modal-message">
                     할 일을 수정해주세요.
                 </p>
-                <input type="text" class="text-input w-f" value="${todo.todoContent}">
+                <input type="text" class="text-input w-f" value="${todo.todoContent}" onKeypress="modifySumitOnkeyUp(event, ${todo.id});">
             </main>
             <footer class="modal-footer">
-                <button class="btn" onclick="modifySumitButtonOnClick(${todo.id}); closeModal();">확인</button>
+                <button class="btn" onclick="modifySumitButtonOnClick(${todo.id});">확인</button>
                 <button class="btn" onclick="closeModal();">닫기</button>
             </footer>
         </div>

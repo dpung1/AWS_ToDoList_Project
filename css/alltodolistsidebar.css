@@ -1,0 +1,26 @@
+.all-todolist-sidebar {
+    transition: right 0.75s ease;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    border: 1px solid black;
+    width: 450px;
+    height: 100%;
+}
+
+.isAllToDoListSidebarOpen {
+    left: 0px;
+}
+
+.all-todolist-title {
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.dropbox {
+    outline: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 20px;
+}

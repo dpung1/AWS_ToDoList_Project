@@ -73,7 +73,7 @@ function handleDateClick(selectedDate) {
         todoListSideBar.classList.add(isToDoListSidebarOpen)
         
         // 사이드바 나올 시 mainContainer안에 있는 달력도 옆으로 이동
-        mainContainer.style.transform = `translateX(-${150}px)`; 
+        mainContainer.style.transform = `translateX(-${100}px)`; 
         
         const year = calendarDate.getFullYear();
         const month = calendarDate.getMonth() + 1;
