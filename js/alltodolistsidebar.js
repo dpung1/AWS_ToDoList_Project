@@ -1,13 +1,16 @@
-const allTodoListOpenClick = () => {
-    const isAllToDoListSidebarOpen = document.querySelector(".all-todolist-btn");
+function allTodoListOpenClick() {
+    const isAllToDoListSidebarOpen = "isAllToDoListSidebarOpen";
 
     const mainContainer = document.querySelector(".main-container");
-    const todoListSideBar = document.querySelector(".all-todolist-sidebar");
+    const allTodoListSideBar = document.querySelector(".all-todolist-sidebar");
 
-    todoListSideBar.classList.toggle(isAllToDoListSidebarOpen)
+    allTodoListSideBar.classList.toggle(isAllToDoListSidebarOpen)
 
-    mainContainer.style.transform = `translateX(${100}px)`; 
-
+    if(allTodoListSideBar.classList.contains(isAllToDoListSidebarOpen)) {
+        mainContainer.style.transform = `translateX(${100}px)`; 
+    } else {
+        mainContainer.style.transform = "none";
+    }
 
     TodoListService.getInstance().allUpdateTodoList();
 }

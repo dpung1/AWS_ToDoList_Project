@@ -2,13 +2,13 @@
     transition: right 0.75s ease;
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: -450px;
     border: 1px solid black;
     width: 450px;
     height: 100%;
 }
 
-.all-todolist-btn {
+.isAllToDoListSidebarOpen {
     left: 0px;
 }
 

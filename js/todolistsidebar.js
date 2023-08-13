@@ -10,6 +10,8 @@ const addTodoOnKeyUpHandle = (event) => {
 
 const checkedOnChangeHandle = (target) => {
     TodoListService.getInstance().setCompleStatus(target.value, target.checked)
+    TodoListService.getInstance().allUpdateTodoList();
+    TodoListService.getInstance().updateTodoList();
 }
 
 const modifyTodoOnClickHandle = (target) => {
