@@ -75,6 +75,11 @@
     align-items: center;
 }
 
+.todolist-date {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
 .todolist-item-buttons {
     display: flex;
     justify-content: center;

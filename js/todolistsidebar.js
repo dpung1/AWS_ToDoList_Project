@@ -37,6 +37,8 @@ const generateTodoObj = () => {
     document.querySelector(".todolist-sidebar-items .text-input").value = ""
     
     TodoListService.getInstance().addTodo(todoObj);
+
+    closeModal();
     
 }
 
@@ -82,6 +84,8 @@ class TodoListService {
         this.saveLocalStorage();
         
         this.updateTodoList();
+
+        this.allUpdateTodoList();
         
         this.todoIndex++;
     }
@@ -106,6 +110,7 @@ class TodoListService {
 
         this.saveLocalStorage();
         this.updateTodoList();
+        this.allUpdateTodoList();
     }
 
     removeTodo(id) {
@@ -115,6 +120,7 @@ class TodoListService {
 
         this.saveLocalStorage();
         this.updateTodoList();
+        this.allUpdateTodoList();
     }
 
     updateTodoList() {
@@ -124,7 +130,7 @@ class TodoListService {
                 return`
                 <li class="todolist-items">
                     <div class="item-left">
-                        <input type="checkbox" id="complet-chkboxㅌ${todo.id}}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                        <input type="checkbox" id="complet-chkbox${todo.id}}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
                         <label for="complet-chkbox${todo.id}"}></label>
                     </div>
                     <div class="itme-center">
@@ -140,4 +146,71 @@ class TodoListService {
                 `;
         }).join("");
     }
+
+    allUpdateTodoList(filteredList = null) {
+        const todoListMainConteiner = document.querySelector(".all-todolist-container");
+
+        const allTodoListToShow = filteredList || this.todoList;
+
+        todoListMainConteiner.innerHTML = allTodoListToShow.map(todo => {
+                return`
+                <li class="todolist-items">
+                    <div class="item-left">
+                        <input type="checkbox" id="complet-chkbox${todo.id}}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                        <label for="complet-chkbox${todo.id}"}></label>
+                    </div>
+                    <div class="itme-center">
+                        <pre class="todolist-contant">${todo.todoContent}</pre>
+                    </div>
+                    <div class="item-right">
+                        <p class="todolist-date">${todo.createDate}</p>
+                        <div class="todolist-item-buttons">
+                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
+                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                        </div>
+                    </div>
+                </li> 
+                `;
+        }).join("");
+    }
+}
+
+const statusDropDown = document.querySelector("#status-dropdown");
+
+const statusDropDownOnChangeHandle = () => {
+    const selectedStatus = statusDropDown.options[statusDropDown.selectedIndex].value;
+
+    let statusValue;
+
+    switch(selectedStatus) {
+        case "전체":
+            statusValue = null;
+            break;
+        case "진행중":
+            statusValue = false;
+            break;
+        case "완료":
+            statusValue = true;
+            break;
+        default :
+            statusValue = null;
+            break;
+    }
+
+    currentFilterStatus = statusValue;
+    filterTodoList(currentFilterStatus);
+}
+
+function filterTodoList(completStatus) {
+    let tempArray = [];
+
+    if(completStatus === null) {
+        tempArray = TodoListService.getInstance().todoList;
+    } else {
+        tempArray = TodoListService.getInstance().todoList.filter((todo) => {
+            return todo.completStatus === completStatus;
+        });
+    }
+
+    TodoListService.getInstance().allUpdateTodoList(tempArray);
 }
