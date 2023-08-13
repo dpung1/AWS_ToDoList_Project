@@ -26,12 +26,10 @@
     font-size: 20px;
 }
 
-.all-todolist-btn {
-    margin: 0px 0px;
-    border: 0px;
-    padding: 0px;
+.todolist-sidebar-title-click {
+    padding: 10px;
+    text-align: center;
     font-size: 20px;
-    background-color: #00ff0000;
     cursor: pointer;
 }
 

@@ -67,14 +67,10 @@
 
 .calendar-tbody td > div > span.today {
     font-weight: 700;
-    color: #647979;
-    text-decoration: underline;
-}
-
-.calendar-tbody td > div > span.selected {
     border-radius: 50%;
     color: white;
-    background-color: #ae78ff;
+    background-color: #647979;
+    text-decoration: underline;
 }
 
 .calendar-tbody td > div > span:hover {
