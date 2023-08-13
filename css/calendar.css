@@ -33,11 +33,11 @@
 }
 
 .calendar-thead th:first-child {
-    color: red; 
+    color: #dc1010; 
 }
 
 .calendar-thead th:nth-child(7) {
-    color: blue;
+    color: #2e13e1;
 }
 
 .calendar-tbody td {
@@ -65,20 +65,31 @@
     height: 50%;
 }
 
-.calendar-tbody td > div > span:hover {
-    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+.calendar-tbody td > div > span.today {
+    font-weight: 700;
+    color: #647979;
+    text-decoration: underline;
+}
+
+.calendar-tbody td > div > span.selected {
     border-radius: 50%;
     color: white;
+    background-color: #ae78ff;
+}
+
+.calendar-tbody td > div > span:hover {
+    border-radius: 50%;
+    color: white;
+    background-color: #ae78ff;
 }
 
 .calendar-tbody td:first-child span {
-    color: red; 
+    color: #dc1010; 
 }
 
 .calendar-tbody td:nth-child(7) span {
-    color: blue;
+    color: #2e13e1;
 }
-
 
 .calendar-before-button,
 .calendar-next-button {

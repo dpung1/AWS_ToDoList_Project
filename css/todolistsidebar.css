@@ -3,9 +3,9 @@
     position: fixed;
     top: 0;
     right: -450px;
-    border: 1px solid black;
     width: 450px;
     height: 100%;
+    background-color: #beadfa;
 }
 
 .isToDoListSidebarOpen {
@@ -39,25 +39,12 @@
     margin: 3px;
 }
 
-.todolist-sidebar-main-container {
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.todolist-sidebar-main-container::-webkit-scrollbar {
-    width: 3px;
-}
-.todolist-sidebar-main-container::-webkit-scrollbar-thumb {
-    background-color: #dbdbdb;
-    border-radius: 3px;
-}
-
 .todolist-items {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 7px 0px;
-    border: 1px solid black;
+    border: 1px solid #fff3da;
     border-width: 1px 0px;
     padding: 10px;
     width: 100%;
@@ -89,12 +76,14 @@
 .btn-edit {
     margin: 0px 3px;
     font-size: 10px;
+    background-color: #00ff0000;
     color: orange;
 }
 
 .btn-remvoe {
     margin: 0px 3px;
     font-size: 10px;
+    background-color: #00ff0000;
     color: red;
 }
 

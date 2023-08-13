@@ -16,6 +16,7 @@ class Calendar {
 }
 
 function showCalendar() {
+    const today = new Date();
     const firstDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
     const lastDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 0);
     
@@ -38,6 +39,15 @@ function showCalendar() {
             const selectedDate = new Date(`${calendarDate.getFullYear()}/${calendarDate.getMonth() + 1}/${contentText.textContent}`);
             handleDateClick(selectedDate);
         });
+
+        if(
+            currentDate.getDate() === today.getDate() &&
+            currentDate.getMonth() === today.getMonth() &&
+            currentDate.getFullYear() === today.getFullYear()
+        ) {
+            contentText.classList.add("today")
+        }
+
         content.appendChild(contentText);
         cell.appendChild(content);
         weekRow.appendChild(cell);
@@ -56,7 +66,6 @@ function showCalendar() {
 function handleDateClick(selectedDate) {
     const isToDoListSidebarOpen = "isToDoListSidebarOpen"; 
 
-    const mainContainer = document.querySelector(".main-container");
     const todoListSideBar = document.querySelector(".todolist-sidebar"); 
     const clickedDateDisplay = document.querySelector(".todolist-sidebar-date");
     const todoInput = document.querySelector(".todolist-sidebar-items .text-input");
@@ -66,21 +75,16 @@ function handleDateClick(selectedDate) {
     if (todoListSideBar.classList.contains(isToDoListSidebarOpen) && Calendar.getInstance().selectedDate - selectedDate === 0) {
 
         todoListSideBar.classList.remove(isToDoListSidebarOpen)
-        mainContainer.style.transform = "none";
 
     } else {
 
         todoListSideBar.classList.add(isToDoListSidebarOpen)
-        
-        // 사이드바 나올 시 mainContainer안에 있는 달력도 옆으로 이동
-        mainContainer.style.transform = `translateX(-${100}px)`; 
         
         const year = calendarDate.getFullYear();
         const month = calendarDate.getMonth() + 1;
         
         clickedDateDisplay.textContent = `${year}년 ${month}월 ${selectedDate.getDate()}일`;
         Calendar.getInstance().selectedDate = selectedDate;
-        
     }
     
     TodoListService.getInstance().updateTodoList();

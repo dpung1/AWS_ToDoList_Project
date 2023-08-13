@@ -9,9 +9,11 @@ const addTodoOnKeyUpHandle = (event) => {
 }
 
 const checkedOnChangeHandle = (target) => {
+
     TodoListService.getInstance().setCompleStatus(target.value, target.checked)
     TodoListService.getInstance().allUpdateTodoList();
     TodoListService.getInstance().updateTodoList();
+
 }
 
 const modifyTodoOnClickHandle = (target) => {
@@ -41,7 +43,6 @@ const generateTodoObj = () => {
     TodoListService.getInstance().addTodo(todoObj);
 
     closeModal();
-    
 }
 
 class TodoListService {
@@ -140,8 +141,8 @@ class TodoListService {
                     </div>
                     <div class="item-right">
                         <div class="todolist-item-buttons">
-                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);"><i class="fa-solid fa-pen-to-square fa-2xl"></i></button>
+                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"><i class="fa-solid fa-trash-can fa-2xl"></i></button>
                         </div>
                     </div>
                 </li> 
@@ -167,8 +168,8 @@ class TodoListService {
                     <div class="item-right">
                         <p class="todolist-date">${todo.createDate}</p>
                         <div class="todolist-item-buttons">
-                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);"><i class="fa-solid fa-pen-to-square fa-2xl"></i></button>
+                            <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"><i class="fa-solid fa-trash-can fa-2xl"></i></button>
                         </div>
                     </div>
                 </li> 

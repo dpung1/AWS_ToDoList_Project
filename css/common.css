@@ -1,20 +1,19 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+    background-color: #dfccfb;
 }
 
 .container {
     position: relative;
     margin: 100px auto;
-    border: 1px solid black; /*나중에 지우기*/
     padding: 10px;
     width: 1080px;
     height: 750px;
 }
 
 .btn {
-    border: 1px solid #dbdbdb;
+    border: 1px solid #00ff0000;
     border-radius: 4px;
     padding: 5px 10px;
     background-color: white;

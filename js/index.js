@@ -1,3 +1,4 @@
-// window.onload = () => {
-//     TodoListService.getInstance().updateTodoList();
-// }
+window.onload = () => {
+    TodoListService.getInstance().updateTodoList();
+    TodoListService.getInstance().allUpdateTodoList();
+}
