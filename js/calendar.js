@@ -1,3 +1,8 @@
+const welcomeGoOnClickHandle = () => {
+    Routes.getInstance().routeState = "welcome"
+    Routes.getInstance().show();
+}
+
 const calendarBody = document.getElementById("calendar-body");
 const monthDisplay = document.querySelector(".calendar-month");
 

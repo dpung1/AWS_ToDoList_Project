@@ -3,11 +3,26 @@
     height: 100%;
     padding: 15px;
 }
+
+.home-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-link-button {
+    border: 1px #00ff0000;
+    padding: 10px;
+    background-color: #00ff0000;
+    cursor: pointer;
+}
+
 .calendar-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .calendar-header {
     display: flex;
     align-items: center;
