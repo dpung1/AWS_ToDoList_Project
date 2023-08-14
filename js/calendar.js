@@ -1,6 +1,16 @@
+// Welcome Page로 이동하는 클릭 이벤트
 const welcomeGoOnClickHandle = () => {
     Routes.getInstance().routeState = "welcome"
     Routes.getInstance().show();
+
+    const isAllToDoListSidebarOpen = "isAllToDoListSidebarOpen";
+    const isToDoListSidebarOpen = "isToDoListSidebarOpen";
+
+    const allTodoListSideBar = document.querySelector(".all-todolist-sidebar");
+    const todoListSideBar = document.querySelector(".todolist-sidebar");
+
+    allTodoListSideBar.classList.remove(isAllToDoListSidebarOpen);
+    todoListSideBar.classList.remove(isToDoListSidebarOpen);
 }
 
 const calendarBody = document.getElementById("calendar-body");
@@ -8,6 +18,7 @@ const monthDisplay = document.querySelector(".calendar-month");
 
 let calendarDate = new Date();
 
+// Calendar 클래스(싱글톤)
 class Calendar {
     static #instance = null;
 
@@ -20,6 +31,7 @@ class Calendar {
     selectedDate = null;
 }
 
+// Calendar 표시
 function showCalendar() {
     const today = new Date();
     const firstDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
@@ -39,24 +51,26 @@ function showCalendar() {
         const cell = document.createElement("td");
         const content = document.createElement("div");
         const contentText = document.createElement("span");
+
         contentText.textContent = currentDate.getDate();
         contentText.addEventListener("click", () => {
             const selectedDate = new Date(`${calendarDate.getFullYear()}/${calendarDate.getMonth() + 1}/${contentText.textContent}`);
             handleDateClick(selectedDate);
         });
-
+        // 오늘 날짜 표시
         if(
             currentDate.getDate() === today.getDate() &&
             currentDate.getMonth() === today.getMonth() &&
             currentDate.getFullYear() === today.getFullYear()
         ) {
+
             contentText.classList.add("today")
         }
 
         content.appendChild(contentText);
         cell.appendChild(content);
         weekRow.appendChild(cell);
-        
+        // 한 주의 끝이거나 마지막날 줄 변경
         if (currentDate.getDay() === 6 || currentDate.getTime() === lastDay.getTime()) {
             calendarBody.appendChild(weekRow);
             weekRow = document.createElement("tr");
@@ -68,22 +82,24 @@ function showCalendar() {
     monthDisplay.textContent = `${calendarDate.getFullYear()}년 ${calendarDate.getMonth() + 1}월`;
 }
 
+// 날짜 클릭 이벤트
 function handleDateClick(selectedDate) {
-    const isToDoListSidebarOpen = "isToDoListSidebarOpen"; 
+    const isToDoListSidebarOpen = "isToDoListSidebarOpen";
+    const isAllToDoListSidebarOpen = "isAllToDoListSidebarOpen";
 
     const todoListSideBar = document.querySelector(".todolist-sidebar"); 
     const clickedDateDisplay = document.querySelector(".todolist-sidebar-date");
     const todoInput = document.querySelector(".todolist-sidebar-items .text-input");
-    
-    todoInput.value = ""; // 사이드바 나올때마다 input창 초기화
-    
+    const allTodoListSideBar = document.querySelector(".all-todolist-sidebar");
+    // 사이드바 나올때마다 input창 초기화
+    todoInput.value = ""; 
+    // 할 일 목록 사이드바 열고 닫기
     if (todoListSideBar.classList.contains(isToDoListSidebarOpen) && Calendar.getInstance().selectedDate - selectedDate === 0) {
-
-        todoListSideBar.classList.remove(isToDoListSidebarOpen)
+        todoListSideBar.classList.remove(isToDoListSidebarOpen);
+        allTodoListSideBar.classList.remove(isAllToDoListSidebarOpen);
 
     } else {
-
-        todoListSideBar.classList.add(isToDoListSidebarOpen)
+        todoListSideBar.classList.add(isToDoListSidebarOpen);
         
         const year = calendarDate.getFullYear();
         const month = calendarDate.getMonth() + 1;
@@ -94,6 +110,7 @@ function handleDateClick(selectedDate) {
     
     TodoListService.getInstance().updateTodoList();
 }
+
 // 이전 달 이동
 function beforeMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, calendarDate.getDate());
@@ -101,6 +118,7 @@ function beforeMonth() {
 }
 
 document.getElementById("beforebtn").addEventListener("click", beforeMonth);
+
 // 다음 달 이동
 function nextMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, calendarDate.getDate());

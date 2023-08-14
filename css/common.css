@@ -12,15 +12,6 @@ body {
     height: 750px;
 }
 
-.btn {
-    border: 1px solid #00ff0000;
-    border-radius: 4px;
-    padding: 5px 10px;
-    background-color: white;
-    font-weight: 600;
-    cursor: pointer; /*버튼위에 마우스 이동시 손가락 표시*/
-}
-
 .main-container {
     transition: transform 0.75s ease;
     padding: 20px;
@@ -32,13 +23,22 @@ body {
     display: none !important;
 }
 
+.w-f {
+    width: 100%;
+}
+
+.btn {
+    border: 1px solid #00ff0000;
+    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer; /*버튼위에 마우스 이동시 손가락 표시*/
+}
+
 .text-input {
     outline: none;
     border: 1px solid #dbdbdb;
     border-radius: 4px;
     padding: 5px 20px;
-}
-
-.w-f {
-    width: 100%;
 }

@@ -12,19 +12,6 @@
     left: 0px;
 }
 
-.all-todolist-container {
-    height: 700px;
-    overflow-y: scroll;
-}
-
-.all-todolist-container::-webkit-scrollbar {
-    width: 5px;
-}
-.all-todolist-container::-webkit-scrollbar-thumb {
-    background-color: #dbdbdb;
-    border-radius: 3px;
-}
-
 .all-todolist-title {
     padding: 10px;
     text-align: center;
@@ -41,3 +28,23 @@
     border-radius: 4px;
     padding: 5px 20px;
 }
+
+.all-todolist-container {
+    height: 700px;
+    overflow-y: scroll;
+}
+
+.all-todolist-container::-webkit-scrollbar {
+    width: 5px;
+}
+.all-todolist-container::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 3px;
+}
+
+.all-todolist-date {
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+

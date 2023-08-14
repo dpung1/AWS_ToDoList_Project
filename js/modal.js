@@ -1,37 +1,22 @@
+// 모달 열기
 const openModal = () => {
     const modal = document.querySelector(".modal");
+
     modal.classList.remove("invisible");
 }
 
+// 모달 닫기
 const closeModal = () => {
     const modal = document.querySelector(".modal");
+    
     modal.classList.add("invisible");
     modal.innerHTML = "";
 }
 
-const modifySumitButtonOnClick = (id) => {
-   const newTodoContent = document.querySelector(".modal-main .text-input").value;
-   const todo = TodoListService.getInstance().getTodoById(id);
-    if(todo.todoContent === newTodoContent || !newTodoContent) {
-        return;
-    }
-    const todoObj = {
-        ...todo,
-        todoContent : newTodoContent
-    }
-    TodoListService.getInstance().setTodo(todoObj);
-    closeModal();
-}
-
-const modifySumitOnkeyUp = (event, id) => {
-    if(event.keyCode === 13) {
-        modifySumitButtonOnClick(id)
-    }
-
-}
-
+// 수정 모달 실행 코드
 const modifyModal = (todo) => {
     const modal = document.querySelector(".modal");
+
     modal.innerHTML = `
         <div class="modal-container">
             <header class="modal-header">
@@ -51,4 +36,30 @@ const modifyModal = (todo) => {
             </footer>
         </div>
     `;
+}
+
+// 모달 수정 확인 버튼 클릭 이벤트
+const modifySumitButtonOnClick = (id) => {
+   const newTodoContent = document.querySelector(".modal-main .text-input").value;
+   const todo = TodoListService.getInstance().getTodoById(id);
+
+    if(todo.todoContent === newTodoContent || !newTodoContent) {
+        return;
+    }
+
+    const todoObj = {
+        ...todo,
+        todoContent : newTodoContent
+    }
+
+    TodoListService.getInstance().setTodo(todoObj);
+    closeModal();
+}
+
+// 모달 수정 확인 버튼 클릭 이벤트를 Enter로 실행 이벤트
+const modifySumitOnkeyUp = (event, id) => {
+    if(event.keyCode === 13) {
+        modifySumitButtonOnClick(id)
+    }
+
 }

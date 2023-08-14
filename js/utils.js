@@ -7,6 +7,7 @@ class DateUtils {
         return `0${value}`;
     }
 
+    // Date의 년, 월, 일 => yyyy-mm-dd로 변환
     static toStringByFormatting(date) {
         const year = date.getFullYear();
         const month = this.leftPad(date.getMonth() + 1);

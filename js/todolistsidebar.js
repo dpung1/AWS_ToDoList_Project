@@ -1,37 +1,41 @@
+// 할 일을 추가하는 클릭 이벤트
 const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
 }
 
+// 할 일을 추가하는 클릭 이벤트를 Enter로 실행 이벤트
 const addTodoOnKeyUpHandle = (event) => {
     if(event.keyCode === 13) {
         generateTodoObj();
     }
 }
 
+// 체크박스 변경 이벤트
 const checkedOnChangeHandle = (target) => {
-
-    TodoListService.getInstance().setCompleStatus(target.value, target.checked)
+    TodoListService.getInstance().setCompleStatus(target.value, target.checked);
     TodoListService.getInstance().allUpdateTodoList();
     TodoListService.getInstance().updateTodoList();
-
 }
 
+// 수정 버튼 클릭 이벤트
 const modifyTodoOnClickHandle = (target) => {
     openModal();
     modifyModal(TodoListService.getInstance().getTodoById(target.value));
 }
 
+// 삭제 버튼 클릭 이벤트
 const deleteTodoOnClickHandle = (target) => {
     TodoListService.getInstance().removeTodo(target.value);
 }
 
+// 할 일 추가 이벤트 시 ToDo 객체 생성
 const generateTodoObj = () => {
     const todoContent = document.querySelector(".todolist-sidebar-items .text-input").value
-    
-    if(!todoContent.trim()) { // 빈칸 및 공백 리스트 추가 X
+    // 빈칸 및 공백 리스트 추가 X
+    if(!todoContent.trim()) { 
         return;
     }
-
+    // ToDo에 들어가는 데이터
     const todoObj = {
         id: 0, 
         todoContent: todoContent,
@@ -45,6 +49,7 @@ const generateTodoObj = () => {
     closeModal();
 }
 
+// ToDo리스트 관리 클래스(싱글톤)
 class TodoListService {
     static #instance = null;
     
@@ -83,16 +88,12 @@ class TodoListService {
         }
         
         this.todoList.push(todo);
-        
         this.saveLocalStorage();
-        
         this.updateTodoList();
-
         this.allUpdateTodoList();
-        
         this.todoIndex++;
     }
-    
+
     setCompleStatus(id, status) {
         this.todoList.forEach((todo, index) => {
             if(todo.id === parseInt(id)) {
@@ -126,6 +127,7 @@ class TodoListService {
         this.allUpdateTodoList();
     }
 
+    // 날짜별 UpDateToDoList
     updateTodoList() {
         const todoListMainConteiner = document.querySelector(".todolist-sidebar-main-container");
 
@@ -150,6 +152,7 @@ class TodoListService {
         }).join("");
     }
 
+    // 전체 UpDateToDoList 및 Filter 용
     allUpdateTodoList(filteredList = null) {
         const todoListMainConteiner = document.querySelector(".all-todolist-container");
 
@@ -166,7 +169,7 @@ class TodoListService {
                         <pre class="todolist-contant">${todo.todoContent}</pre>
                     </div>
                     <div class="item-right">
-                        <p class="todolist-date">${todo.createDate}</p>
+                        <p class="all-todolist-date">${todo.createDate}</p>
                         <div class="todolist-item-buttons">
                             <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);"><i class="fa-solid fa-pen-to-square fa-2xl"></i></button>
                             <button class="btn btn-remvoe" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"><i class="fa-solid fa-trash-can fa-2xl"></i></button>
@@ -176,44 +179,4 @@ class TodoListService {
                 `;
         }).join("");
     }
-}
-
-const statusDropDown = document.querySelector("#status-dropdown");
-
-const statusDropDownOnChangeHandle = () => {
-    const selectedStatus = statusDropDown.options[statusDropDown.selectedIndex].value;
-
-    let statusValue;
-
-    switch(selectedStatus) {
-        case "전체":
-            statusValue = null;
-            break;
-        case "진행중":
-            statusValue = false;
-            break;
-        case "완료":
-            statusValue = true;
-            break;
-        default :
-            statusValue = null;
-            break;
-    }
-
-    currentFilterStatus = statusValue;
-    filterTodoList(currentFilterStatus);
-}
-
-function filterTodoList(completStatus) {
-    let tempArray = [];
-
-    if(completStatus === null) {
-        tempArray = TodoListService.getInstance().todoList;
-    } else {
-        tempArray = TodoListService.getInstance().todoList.filter((todo) => {
-            return todo.completStatus === completStatus;
-        });
-    }
-
-    TodoListService.getInstance().allUpdateTodoList(tempArray);
 }
