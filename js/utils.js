@@ -15,13 +15,4 @@ class DateUtils {
 
         return [year, month, day].join("-");
     }
-
-    static getDateFromCalendarElements(calendarMonth, calendarDay) {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = calendarMonth.textContent.split(" ")[0];
-        const day = parseInt(calendarDay.textContent);
-
-        return new Date(year, monthNames.indexOf(month), day);
-    }
 }

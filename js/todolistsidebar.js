@@ -135,8 +135,8 @@ class TodoListService {
                 return`
                 <li class="todolist-items">
                     <div class="item-left">
-                        <input type="checkbox" id="complet-chkbox${todo.id}}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-                        <label for="complet-chkbox${todo.id}"}></label>
+                        <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                        <label for="complet-chkbox${todo.id}"></label>
                     </div>
                     <div class="itme-center">
                         <pre class="todolist-contant">${todo.todoContent}</pre>
@@ -162,8 +162,8 @@ class TodoListService {
                 return`
                 <li class="todolist-items">
                     <div class="item-left">
-                        <input type="checkbox" id="complet-chkbox${todo.id}}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-                        <label for="complet-chkbox${todo.id}"}></label>
+                        <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                        <label for="complet-chkbox${todo.id}"></label>
                     </div>
                     <div class="itme-center">
                         <pre class="todolist-contant">${todo.todoContent}</pre>
@@ -180,3 +180,4 @@ class TodoListService {
         }).join("");
     }
 }
+
