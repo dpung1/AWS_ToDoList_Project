@@ -89,8 +89,8 @@
 }
 
 .calendar-tbody td > div > span.today {
-    font-weight: 700;
     border-radius: 50%;
+    font-weight: 700;
     color: white;
     background-color: #647979;
     text-decoration: underline;
@@ -99,7 +99,16 @@
 .calendar-tbody td > div > span:hover {
     border-radius: 50%;
     color: white;
+    background-color: #ccaaff;
+}
+
+/* 선택한 날짜 표시하기 */
+.calendar-tbody td > div > span.select {
+    border-radius: 50%;
+    font-weight: 600;
+    color: white;
     background-color: #ae78ff;
+    text-decoration: underline;
 }
 
 .calendar-before-button,
