@@ -9,8 +9,12 @@ const welcomeGoOnClickHandle = () => {
     const allTodoListSideBar = document.querySelector(".all-todolist-sidebar");
     const todoListSideBar = document.querySelector(".todolist-sidebar");
 
+    const selectedDayPoint = document.querySelectorAll(".select")
+            selectedDayPoint.forEach(point => point.classList.remove("select"));
+
     allTodoListSideBar.classList.remove(isAllToDoListSidebarOpen);
     todoListSideBar.classList.remove(isToDoListSidebarOpen);
+    contentText.classList.remove("select")
 }
 
 const calendarBody = document.getElementById("calendar-body");
